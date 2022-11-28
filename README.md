@@ -58,9 +58,9 @@ pipe(10, plus20, plus20(), plus20(_), echo)
 pipe(10, plus_a1(30,_), plus_a1(40,_), echo)
 
 let c = pipe 10:
-	plus20
-	plus_a0(40)
-	plus_a1(30,_)
+  plus20
+  plus_a0(40)
+  plus_a1(30,_)
 ```
 
 ## To-do
