@@ -1,0 +1,16 @@
+[
+  {
+    "name": "pipexp",
+    "url": "https://codeberg.org/emanresu3/nim-pipexp",
+    "method": "git",
+    "tags": [
+      "pipe",
+      "pipeline",
+      "pipelines",
+      "operator",
+    ],
+    "description": "Expression-based pipe operators with placeholder argument",
+    "license": "MIT",
+    "web": "https://codeberg.org/emanresu3/nim-pipexp"
+  },
+]
