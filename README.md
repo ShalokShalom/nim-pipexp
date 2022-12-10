@@ -48,9 +48,29 @@ let a = 10 | plus20
 10 | plus_a0(_,20) | echo
 10 | plus_a1(20,_) | echo
 10 | plus_a1(30,_) | plus_a1(40,_) | echo
+
+# You can pass multiple placeholders:
+proc plus_as(a1, a2, a3: int): int = a1 + a2 + a3
+10 | plus_as(_,_,50) | echo
+10 | plus_as(90,_,_) | echo
+10 | plus_as(_,_,_) | echo
+
+# You can pass lambdas if they are enclosed by curly brackets or parentheses:
+10 | {
+proc(x: int): int =
+  x + 20
+} | echo
+
+# You can index the placeholder
+[10,20] | plus20(_[1]) | echo
+[10,20] | plus20(_[0]) | echo
+
+# You can call the placeholder
+plus20 | plus20(_(10)) | echo
 ```
 
-You can also make use of a pipeline macro called `pipe`:
+You can also make use of a pipeline macro called `pipe` to
+separate the callables in different lines:
 ```nim
 let b = pipe(10, plus20)
 pipe(10, plus20, echo)
@@ -61,13 +81,22 @@ let c = pipe 10:
   plus20
   plus_a0(40)
   plus_a1(30,_)
+  {
+    proc (_: int): int =
+      _ + 50
+  }
 ```
 
 ## To-do
-- Support anonymous procs
-- Other features like [Pipe.jl](https://github.com/oxinabox/Pipe.jl)
-- Allow configuring the placeholder symbol
-- Allow multiple instances of "`_`"
+- [ ] Support anonymous procs
+	- [X] Nim native lambdas
+	- [ ] `=>` anonymous procs from `std/sugar`
+- [ ] Other features like [Pipe.jl](https://github.com/oxinabox/Pipe.jl)
+	- [X] Indexing placeholder
+	- [ ] Unpacking placeholder
+	- [X] Calling placeholder
+- [ ] Allow configuring the placeholder symbol
+- [X] Allow multiple instances of "`_`"
 
 Maybe:
 - Other operators like [magrittr](https://github.com/tidyverse/magrittr)
